@@ -55,6 +55,11 @@ module.exports = function(grunt) {
                     src: [ './**/*.html' ],
                     dest: './dist/templates',
                     cwd: './app/templates'
+                }, {
+                    expand: true,
+                    src: [ './node_modules/angular-ui-router/release/angular-ui-router.min.js' ],
+                    dest: './dist/scripts',
+                    cwd: '.'
                 }]
             }
         },
