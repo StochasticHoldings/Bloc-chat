@@ -1,6 +1,29 @@
-<div ng-controller="RoomCtrl as vm">
-<h1>Home Page</h1>
-<div ng-repeat="room in vm.rooms">
-  <span class='text-center'>{{room.data.$value}}</span>
-</div>
+
+<div class="container" ng-controller="RoomCtrl as vm">
+  <div class ="row">
+    <div class="col-sm-3">
+      <h3>Chat Rooms</h3>
+<!-- received data  -->
+      <div ng-repeat="room in vm.rooms">
+        <span class='text-center'>{{room.name}}</span>
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+        <h1>Home Page</h1>
+        <!-- <div ng-repeat="room in vm.rooms">
+          <span class='text-center'>{{room.data.$value}}</span>
+        </div> -->
+
+
+        <form>
+          Create New Room: {{vm.newRoom.name}}
+          <input type="text" ng-model="vm.newRoom.name">
+
+          <input type="submit" ng-click="vm.addRoom()">
+
+        </form>
+
+    </div>
+  </div>
 </div>
