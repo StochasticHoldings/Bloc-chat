@@ -1,0 +1,32 @@
+/* Style of the entire page guidline.
+1) Background should be black
+2) Text Should Be White.
+3) White Outline To Chat Rooms
+4) Blue & White Chats */
+
+
+
+body {
+  /*background-color: #000 !important; */
+}
+
+.message {
+  border:2px solid white;
+}
+
+/*.currentmessages {
+  border:2px solid white;
+}*/
+.this-message{
+  background-color: #00AEEF;
+  padding: 4px;
+  margin: 2px;
+  color: #000;
+  border-radius: 2px;
+}
+#listMessages {
+  wrapper
+width: auto;
+height:auto;
+background-color: #00AEEF;
+}
