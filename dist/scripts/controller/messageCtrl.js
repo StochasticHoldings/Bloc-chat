@@ -1,17 +1,15 @@
-
-$scope.messsage = {
-  username: "<USERNAME HERE>",
- content: "<CONTENT OF THE MESSAGE HERE>",
- sentAt: "<TIME MESSAGE WAS SENT HERE>",
- roomId: "<ROOM UID HERE>"
-};
-
 (function() {
-     function roomCtrl(Rooms) {
+     function messageCtrl(MessageService) {
         var vm = this;
         // vm.rooms = [];
 
-        vm.rooms = Rooms.all
+        //vm.message = Messages.all
+        vm.messages = [{
+          username: "<USERNAME HERE>",
+         content: "<CONTENT OF THE MESSAGE HERE>",
+         sentAt: "<TIME MESSAGE WAS SENT HERE>",
+         roomId: "<ROOM UID HERE>"
+       }];
 
 
         // Rooms.all.$loaded().then(function(){
@@ -21,14 +19,14 @@ $scope.messsage = {
         //   console.log(vm.rooms);
         // });
 
-        vm.addRoom = function(){
-          Rooms.all.$add(vm.newRoom)
-        }
+      //  vm.addMessage = function(){
+      //    Messages.all.$add(vm.message)
+      //  }
 
-        window.foo = Rooms.all
+        window.foo = MessageService.all
     }
 
     angular
         .module('Bloc-chat')
-        .controller('RoomCtrl', ['Rooms', roomCtrl]);
+        .controller('messageCtrl', ['MessageService', messageCtrl]);
 })();
