@@ -1,28 +1,36 @@
 
-<div class="container" ng-controller="RoomCtrl as vm">
+<div class="container" >
   <div class ="row">
-    <div class="col-sm-3">
+    <div class="col-sm-3" ng-controller="RoomCtrl as rvm">
+      <button id="popup" on-click="div_show()">Add New Room</button>
+      <form>
+        Create New Room: {{rvm.newRoom.name}}
+        <input type="text" ng-model="rvm.newRoom.name">
+        <input type="submit" ng-click="rvm.addRoom()">
+      </form>
       <h3>Chat Rooms</h3>
 <!-- received data  -->
-      <div ng-repeat="room in vm.rooms">
+      <div ng-repeat="room in rvm.rooms">
         <span class='text-center'>{{room.name}}</span>
       </div>
     </div>
 
-    <div class="col-sm-9">
-        <h1>Home Page</h1>
+    <div class="col-sm-9 message" ng-controller="messageCtrl as mvm" >
+        <h1>List Messages</h1>
         <!-- <div ng-repeat="room in vm.rooms">
           <span class='text-center'>{{room.data.$value}}</span>
         </div> -->
-
-
+    <div class="currentmessages">
+        <span class="active">my messages will show up here</span>
+      <div ng-repeat="message in mvm.messages">
+        <p class="this-message">hi</p>
+        <span class='text-center'>{{message.username}}</span>
         <form>
-          Create New Room: {{vm.newRoom.name}}
-          <input type="text" ng-model="vm.newRoom.name">
-
-          <input type="submit" ng-click="vm.addRoom()">
-
+          Join The Conversation: {{mvm.newMessage.username}}
+          <input type="text" ng-model="mvm.newMessage.name">
+          <input type="submit" ng-click="mvm.addMessage()">
         </form>
+    </div>
 
     </div>
   </div>
