@@ -12,16 +12,7 @@
        }];
 
 
-        // Rooms.all.$loaded().then(function(){
-        //    angular.forEach(Rooms.all, function(value, key){
-        //       vm.rooms.push({id: key, data: value});
-        //    });
-        //   console.log(vm.rooms);
-        // });
-
-      //  vm.addMessage = function(){
-      //    Messages.all.$add(vm.message)
-      //  }
+        
 
         window.foo = MessageService.all
     }

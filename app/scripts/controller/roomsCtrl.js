@@ -1,9 +1,27 @@
 (function() {
-     function roomCtrl(Rooms) {
+     function roomCtrl($scope, MessageService,RoomService) {
         var vm = this;
-        // vm.rooms = [];
+        vm.rooms = [];
+        vm.selectedRoom = null;
+        vm.messages = [];
+      // MessageService.all.$loaded().then(function(results){
+      //     angular.forEach(results, function(value, key){
+      //         vm.rooms.push({id: key, data: value});
+      //       });
+      //      console.log(vm.rooms);
+      //    });
 
-        vm.rooms = Rooms.all
+        RoomService.all.$loaded()
+          .then(function(results){
+            console.log(results);
+            vm.rooms = results;
+            if(vm.rooms.length > 0){
+              vm.selectedRoom = vm.rooms[0];
+              vm.messages = MessageService.all
+            //  getMessages(vm.selectedRoom.$id);
+            }
+          });
+
 
         // Rooms.all.$loaded().then(function(){
         //    angular.forEach(Rooms.all, function(value, key){
@@ -13,13 +31,43 @@
         // });
 
         vm.addRoom = function(){
-          Rooms.all.$add(vm.newRoom)
+          RoomService.all.$add(vm.newRoom)
+        }
+        vm.addMessage = function(){
+          console.log("hi");
+          vm.newMessage.roomId = vm.selectedRoom.$id
+          MessageService.all.$add(vm.newMessage)
         }
 
-        window.foo = Rooms.all
+        vm.setRoom = function(room){
+          vm.selectedRoom = room
+          vm.messages = MessageService.getByRoomId(room.$id)
+          console.log(vm.messages)
+          // reset the specific messages that are visible
+
+        }
+
+
+        function getMessages(roomId){
+            vm.messages = [];
+            MessageService.getByRoomId(roomId).once('value', function(snapshot){
+                snapshot.forEach(function(childSnapshot){
+                  var msg = childSnapshot.val();
+                  vm.messages.push({
+                    key: childSnapshot.key,
+                    content: msg.content,
+                    timesent: msg.sentAt,
+                    user: msg.username
+                  });
+                  console.log(['Messages', vm.messages]);
+                  $scope.$apply();
+                });
+              });
+        }
+        window.foo = RoomService.all
     }
 
     angular
         .module('Bloc-chat')
-        .controller('RoomCtrl', ['Rooms', roomCtrl]);
+        .controller('RoomCtrl', ['$scope', 'MessageService','RoomService', roomCtrl]);
 })();
