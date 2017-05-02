@@ -1,5 +1,5 @@
 (function() {
-     function roomCtrl($scope, MessageService,RoomService) {
+     function roomCtrl($scope, MessageService,RoomService, $cookies) {
         var vm = this;
         vm.rooms = [];
         vm.selectedRoom = null;
@@ -65,9 +65,14 @@
               });
         }
         window.foo = RoomService.all
+
+
+        vm.logOut = function(){
+          $cookies.remove('blocChatCurrentUser')
+        }
     }
 
     angular
         .module('Bloc-chat')
-        .controller('RoomCtrl', ['$scope', 'MessageService','RoomService', roomCtrl]);
+        .controller('RoomCtrl', ['$scope', 'MessageService','RoomService', '$cookies', roomCtrl]);
 })();
