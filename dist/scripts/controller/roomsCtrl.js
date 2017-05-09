@@ -34,8 +34,9 @@
           RoomService.all.$add(vm.newRoom)
         }
         vm.addMessage = function(){
-          console.log("hi");
           vm.newMessage.roomId = vm.selectedRoom.$id
+          console.log($cookies.get('blocChatCurrentUser'));
+          vm.newMessage.user = $cookies.get('blocChatCurrentUser');
           MessageService.all.$add(vm.newMessage)
         }
 
